@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC - شبكة الأخبار</title>
+
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; direction: rtl; }
+        header { background-color: #1a1a1a; color: #fff; text-align: center; padding: 20px 0; border-bottom: 4px solid #d32f2f; }
+        header h1 { margin: 0; font-size: 32px; font-weight: bold; letter-spacing: 1px; }
+        
+        .main-container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
+        
+        .top-section { display: flex; gap: 25px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+        .news-section { flex: 1; min-width: 300px; }
+        .news-section h2 { margin-top: 0; border-right: 4px solid #d32f2f; padding-right: 10px; font-size: 22px; color: #1a1a1a; margin-bottom: 20px; }
+        
+        /* كروت الأخبار */
+        .news-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-right: 4px solid #d32f2f; margin-bottom: 15px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+        .news-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.12); }
+        .news-card h3 { margin: 0 0 8px 0; font-size: 17px; color: #1a1a1a; }
+        .news-card p { font-size: 13px; color: #666; margin: 0; line-height: 1.5; }
+        .read-more { font-size: 12px; color: #d32f2f; font-weight: bold; margin-top: 10px; display: inline-block; }
+
+        .about-box { width: 260px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.08); border-top: 4px solid #d32f2f; border: 1px solid #eee; }
+
+        /* النافذة المنبثقة للخبر */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(3px); align-items: center; justify-content: center; }
+        .modal-content { background-color: #fff; padding: 30px; border-radius: 12px; width: 90%; max-width: 600px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 24px; font-weight: bold; color: #888; cursor: pointer; }
+        .close-btn:hover { color: #d32f2f; }
+        .modal-title { font-size: 22px; color: #1a1a1a; margin-top: 0; border-right: 4px solid #d32f2f; padding-right: 10px; }
+        .modal-body { font-size: 15px; color: #444; line-height: 1.8; margin-top: 20px; white-space: pre-line; }
+
+        footer { background: #1a1a1a; color: #ccc; text-align: center; padding: 15px; margin-top: 60px; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SSC</h1>
+    </header>
+
+    <div class="main-container">
+        <div class="top-section">
+            
+            <div class="news-section">
+                <h2>أحدث المستجدات الأخبارية</h2>
+                
+                <div class="news-card" onclick="openNews('أحداث وتطورات ميدانية', 'شهدت منازل ومناطق العاصمة ضربات متتالية بالطائرات المسيرة الانقضاضية، مع مواصلة العمليات الأمنية لشرطة أم درمان في استرداد المسروقات وتأمين الأحياء.\n\nكما أعلن الجيش السوداني عن تنفيذ عمليات نوعية في ولاية النيل الأزرق، مع استمرار المتابعات الميدانية لضبط الحدود ومكافحة التهريب حيث تم ضبط شحنات أسلحة بالبحر الأحمر.')">
+                    <h3>أحداث وتطورات ميدانية</h3>
+                    <p>عمليات أمنية بضربات مسيرة وتأمين الأحياء واسترداد المسروقات...</p>
+                    <span class="read-more">اضغط لقراءة التفاصيل الكاملة ←</span>
+                </div>
+
+                <div class="news-card" onclick="openNews('الحراك الدبلوماسي والدولي', 'اعتمد مجلس الأمن الدولي قراراً بتمديد ولاية فريق الخبراء المعني بالسودان تقنياً لمدة شهرين، دون الإجماع على توسيع حظر الأسلحة بسبب تباين الآراء وتحفظات دولية.\n\nمن جانب آخر تواصل الآلية الخماسية المشاورات مع الأطراف المختلفة لبحث مسارات وقف الحرب وتأكيد خيار الحل السلمي.')">
+                    <h3>الحراك الدبلوماسي والدولي</h3>
+                    <p>قرار مجلس الأمن وتمديد فريق الخبراء مع استمرار جهود الآلية الخماسية...</p>
+                    <span class="read-more">اضغط لقراءة التفاصيل الكاملة ←</span>
+                </div>
+
+                <div class="news-card" onclick="openNews('الوضع الاقتصادي والخدمي', 'استمرار الضغوط الاقتصادية وارتفاع أسعار الصرف للجنيه أمام العملات الأجنبية مما انعكس على أسعار السلع.\n\nوعلى صعيد قطاع الطاقة، تم توقيع مذكرة تفاهم لإعادة تأهيل مصفاة الخرطوم وإنشاء مصفاة جديدة ببروتسودان.\n\nوفي قطاع التعليم، أعلنت جامعة الخرطوم ترتيبات العودة والتسجيل التدريجي للطلاب.')">
+                    <h3>الوضع الاقتصادي والخدمي</h3>
+                    <p>مذكرات تفاهم بقطاع النفط وترتيبات لعودة الدراسة بجامعة الخرطوم...</p>
+                    <span class="read-more">اضغط لقراءة التفاصيل الكاملة ←</span>
+                </div>
+
+            </div>
+
+            <div class="about-box">
+                <h3 style="margin-top:0; font-size:16px;">عن الموقع</h3>
+                <p style="font-size:13px; color:#555; line-height:1.6;">موقع SSC الرسمي لنشر أحدث المقالات والتقارير الحصرية والجرائد أولاً بأول.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- النافذة التكبيرية للخبر -->
+    <div id="newsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeNews()">&times;</span>
+            <h3 id="modalTitle" class="modal-title">عنوان الخبر</h3>
+            <div id="modalBody" class="modal-body">تفاصيل الخبر...</div>
+        </div>
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة © 2026 - SSC
+    </footer>
+
+    <script>
+        function openNews(title, details) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = details;
+            document.getElementById('newsModal').style.display = 'flex';
+        }
+
+        function closeNews() {
+            document.getElementById('newsModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('newsModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
