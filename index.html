@@ -7,9 +7,20 @@
 
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; direction: rtl; }
-        header { background-color: #1a1a1a; color: #fff; text-align: center; padding: 20px 0; border-bottom: 4px solid #d32f2f; }
-        header h1 { margin: 0; font-size: 32px; font-weight: bold; letter-spacing: 1px; }
         
+        /* الهيدر المعدل لإضافة الاسم على اليسار */
+        header { 
+            background-color: #1a1a1a; 
+            color: #fff; 
+            padding: 15px 30px; 
+            border-bottom: 4px solid #d32f2f; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        header h1 { margin: 0; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
+        .designer-tag { font-size: 14px; color: #ccc; font-weight: 500; }
+
         .main-container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
         
         .top-section { display: flex; gap: 25px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
@@ -25,7 +36,7 @@
 
         .about-box { width: 260px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.08); border-top: 4px solid #d32f2f; border: 1px solid #eee; }
 
-        /* صفحة الأخبار الكاملة */
+        /* صفحة الأخبار المستقلة */
         #newsPage { display: none; }
         .back-btn { background-color: #d32f2f; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: bold; margin-bottom: 25px; transition: background 0.2s; }
         .back-btn:hover { background-color: #b71c1c; }
@@ -42,7 +53,9 @@
 <body>
 
     <header>
+        <span class="designer-tag">تصميم: أبو القاسم البشرى</span>
         <h1>SSC</h1>
+        <div style="width: 100px;"></div> <!-- للمحافظة على توسيط العنوان SSC -->
     </header>
 
     <!-- الصفحة الرئيسية -->
@@ -159,7 +172,6 @@
                 container.innerHTML += newsHtml;
             });
 
-            // إخفاء الرئيسية وإظهار صفحة الأخبار
             document.getElementById('homePage').style.display = 'none';
             document.getElementById('newsPage').style.display = 'block';
             window.scrollTo(0, 0);
