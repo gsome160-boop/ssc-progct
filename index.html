@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSC - شبكة الأخبار</title>
+    <title>العقد المجتمعي السوداني - SSC</title>
 
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; direction: rtl; }
         
-        /* الهيدر المعدل لإضافة الاسم على اليسار */
         header { 
             background-color: #1a1a1a; 
             color: #fff; 
@@ -18,7 +17,9 @@
             justify-content: space-between; 
             align-items: center; 
         }
-        header h1 { margin: 0; font-size: 28px; font-weight: bold; letter-spacing: 1px; }
+        .header-title-container { text-align: center; }
+        header h1 { margin: 0; font-size: 24px; font-weight: bold; }
+        header .sub-logo { margin-top: 4px; font-size: 14px; color: #d32f2f; font-weight: bold; letter-spacing: 2px; }
         .designer-tag { font-size: 14px; color: #ccc; font-weight: 500; }
 
         .main-container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
@@ -27,7 +28,6 @@
         .news-section { flex: 1; min-width: 300px; }
         .news-section h2 { margin-top: 0; border-right: 4px solid #d32f2f; padding-right: 10px; font-size: 22px; color: #1a1a1a; margin-bottom: 20px; }
         
-        /* كروت الأقسام */
         .news-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-right: 4px solid #d32f2f; margin-bottom: 15px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
         .news-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.12); }
         .news-card h3 { margin: 0 0 8px 0; font-size: 18px; color: #1a1a1a; }
@@ -36,16 +36,19 @@
 
         .about-box { width: 260px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.08); border-top: 4px solid #d32f2f; border: 1px solid #eee; }
 
-        /* صفحة الأخبار المستقلة */
-        #newsPage { display: none; }
+        #articlePage { display: none; }
         .back-btn { background-color: #d32f2f; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: bold; margin-bottom: 25px; transition: background 0.2s; }
         .back-btn:hover { background-color: #b71c1c; }
         
-        .page-title { font-size: 26px; color: #1a1a1a; border-right: 5px solid #d32f2f; padding-right: 12px; margin-bottom: 30px; }
-        
-        .sub-news-item { background: #fff; border: 1px solid #e0e0e0; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-right: 4px solid #1a1a1a; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
-        .sub-news-item h4 { margin: 0 0 10px 0; font-size: 18px; color: #d32f2f; }
-        .sub-news-item p { margin: 0; font-size: 15px; color: #333; line-height: 1.7; }
+        .article-header { text-align: center; background: #fff; padding: 30px 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 25px; border-top: 4px solid #d32f2f; }
+        .author-img { width: 140px; height: 170px; object-fit: cover; border-radius: 8px; border: 3px solid #d32f2f; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .article-series { color: #d32f2f; font-weight: bold; font-size: 16px; margin-bottom: 5px; }
+        .article-subtitle { color: #555; font-size: 14px; margin-bottom: 15px; }
+        .article-title { font-size: 24px; color: #1a1a1a; margin: 10px 0; }
+        .author-name { font-weight: bold; color: #333; font-size: 15px; margin-top: 10px; }
+
+        .article-body { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); font-size: 16px; color: #2c3e50; line-height: 2; text-align: justify; }
+        .article-body p { margin-bottom: 18px; }
 
         footer { background: #1a1a1a; color: #ccc; text-align: center; padding: 15px; margin-top: 60px; font-size: 13px; }
     </style>
@@ -54,8 +57,11 @@
 
     <header>
         <span class="designer-tag">تصميم: أبو القاسم البشرى</span>
-        <h1>SSC</h1>
-        <div style="width: 100px;"></div> <!-- للمحافظة على توسيط العنوان SSC -->
+        <div class="header-title-container">
+            <h1>العقد المجتمعي السوداني</h1>
+            <div class="sub-logo">SSC</div>
+        </div>
+        <div style="width: 120px;"></div>
     </header>
 
     <!-- الصفحة الرئيسية -->
@@ -63,122 +69,79 @@
         <div class="top-section">
             
             <div class="news-section">
-                <h2>أحدث المستجدات الأخبارية</h2>
+                <h2>المقالات والمنشورات</h2>
                 
-                <div class="news-card" onclick="openPage('field')">
-                    <h3>أحداث وتطورات ميدانية</h3>
-                    <p>انقر لعرض كافة المستجدات والعمليات الميدانية والأمنية الأخيرة...</p>
-                    <span class="read-more">الانتقال إلى صفحة الأخبار ←</span>
-                </div>
-
-                <div class="news-card" onclick="openPage('diplomatic')">
-                    <h3>الحراك الدبلوماسي والدولي</h3>
-                    <p>انقر لعرض قرارات مجلس الأمن والتطورات السياسية وتفاصيل المفاوضات...</p>
-                    <span class="read-more">الانتقال إلى صفحة الأخبار ←</span>
-                </div>
-
-                <div class="news-card" onclick="openPage('services')">
-                    <h3>الوضع الاقتصادي والخدمي</h3>
-                    <p>انقر لمتابعة أسعار الصرف، مشاريع النفط والطاقة، وأخبار التعليم...</p>
-                    <span class="read-more">الانتقال إلى صفحة الأخبار ←</span>
+                <div class="news-card" onclick="openArticle()">
+                    <h3>مقال 1: دعوة إلى رحاب الوطن</h3>
+                    <p>سلسلة نحو بناء العقد المجتمعي السوداني - بقلم الأستاذ/ محمد أحمد البشرى...</p>
+                    <span class="read-more">قراءة المقال كاملًا ←</span>
                 </div>
 
             </div>
 
             <div class="about-box">
-                <h3 style="margin-top:0; font-size:16px;">عن الموقع</h3>
-                <p style="font-size:13px; color:#555; line-height:1.6;">موقع SSC الرسمي لنشر أحدث المقالات والتقارير الحصرية والجرائد أولاً بأول.</p>
+                <h3 style="margin-top:0; font-size:16px;">عن المنصة</h3>
+                <p style="font-size:13px; color:#555; line-height:1.6;">منصة "العقد المجتمعي السوداني" (SSC) لنشر المقالات والرؤى والتقارير الفكرية والوطنية.</p>
             </div>
 
         </div>
     </div>
 
-    <!-- الصفحة المستقلة للأخبار -->
-    <div id="newsPage" class="main-container">
+    <!-- صفحة المقال الكاملة -->
+    <div id="articlePage" class="main-container">
         <button class="back-btn" onclick="goHome()">→ العودة للصفحة الرئيسية</button>
-        <h2 id="pageTitle" class="page-title">قسم الأخبار</h2>
-        <div id="pageNewsContainer">
-            <!-- الأخبار تنزل هنا -->
+
+        <div class="article-header">
+            <img src="author.png" alt="الأستاذ محمد أحمد البشرى" class="author-img">
+            <div class="article-series">سلسلة نحو بناء العقد المجتمعي السوداني</div>
+            <div class="article-subtitle">وطنٌ واحد، وحقوقٌ متساوية، ومستقبلٌ يجمعنا</div>
+            <h2 class="article-title">المقال رقم (1): دعوة إلى رحاب الوطن</h2>
+            <div class="author-name">بقلم: الأستاذ / محمد أحمد البشرى</div>
         </div>
+
+        <div class="article-body">
+            <p>في لحظة فارقة من تاريخ السودان، لم يعد هناك ما هو أولى من الوطن، ولا ما ينبغي أن يتقدم على أمنه ووحدته وسلامة شعبه. فالسودان اليوم يحتاج إلى أن نعيد ترتيب أولوياتنا، وأن ندرك أن الوطن ليس ساحةً تتصارع فيها الانتماءات، بل هو المظلة التي تجمعنا جميعًا، مهما اختلفت مشاربنا وتعددت رؤانا.</p>
+
+            <p>إن بناء السودان الذي نريده يبدأ من العودة إلى الانتماء الأول والأصيل: الانتماء إلى السودان.</p>
+
+            <p>وهذه دعوة إلى كل سوداني وسودانية استطاعوا أن يتجاوزوا ضيق الانتماءات الحزبية ونعرات القبيلة والجهوية وأن ينظروا إلى الوطن باعتباره أكبر من الأحزاب وأوسع من المناطق والقبائل وأبقى من الخلافات السياسية التي تتغير مع الزمن.</p>
+
+            <p>إن السودان وطن متنوع في جغرافيته وثقافاته ومجتمعاته وهذا التنوع لا ينبغي أن يكون مصدرًا للصراع وإنما يمكن أن يكون أساسًا للتكامل والقوة متى ما قام بين أبنائه عقد اجتماعي جديد يؤكد أن الجميع شركاء في الوطن متساوون في الحقوق والواجبات ومتساوون أمام القانون.</p>
+
+            <p>ومن هنا فإننا بحاجة إلى صفحة جديدة لا تقوم على الانتقام من الماضي ولا على إعادة إنتاج الصراعات القديمة وإنما على التعلم من أخطائها والاعتراف بأن استمرار الإقصاء والتهميش والانقسام لن يقود السودان إلا إلى مزيد من الأزمات.</p>
+
+            <p>صفحة جديدة عنوانها التسامح والعدل والمواطنة والحوار والمسؤولية الوطنية.</p>
+
+            <p>نحتاج إلى مشروع وطني جامع يلم الشمل ويحفظ وحدة السودان أرضًا وشعبًا ويصون كرامة الإنسان السوداني وهويته الجامعة ويضمن لكل مواطن حقه في الأمن والحرية والعيش الكريم بعيدًا عن التمييز بسبب العرق أو القبيلة أو الجهة أو الفكر أو الانتماء السياسي.</p>
+
+            <p>كما أن بناء الدولة لا يستقيم من دون مؤسسات وطنية قوية وقادرة على حماية البلاد وصون سيادتها وفي مقدمتها القوات المسلحة السودانية وسائر مؤسسات الدولة الوطنية مع التأكيد في الوقت ذاته على أن الغاية النهائية هي وطن آمن ومستقر يسود فيه القانون وتحفظ فيه الحقوق ويكون السلام فيه خيارًا حقيقيًا لا مجرد هدنة مؤقتة.</p>
+
+            <p>إن السودان لا يحتاج اليوم إلى مزيد من الاصطفافات التي تزيد الانقسام وإنما يحتاج إلى إرادة وطنية تتسع للجميع إرادة تجعل المصلحة الوطنية فوق المصالح الضيقة والحوار فوق الإقصاء والمواطنة فوق العصبية ووحدة السودان فوق كل الحسابات.</p>
+
+            <p>ومن هذا المنطلق فإن الدعوة إلى رحاب الوطن ليست دعوة إلى التخلي عن القناعات أو إلغاء الاختلاف وإنما هي دعوة إلى أن نجعل اختلافاتنا تحت سقف السودان وأن نبحث عن القواسم المشتركة التي يمكن أن نبني عليها مستقبلًا جديدًا.</p>
+
+            <p>فالوطن لا يبنيه طرف واحد ولا حزب واحد ولا قبيلة واحدة ولا منطقة واحدة بل يبنيه جميع أبنائه وبناته كل من موقعه حين تتقدم المصلحة الوطنية على كل اعتبار.</p>
+
+            <p>فلنجعل السودان بوصلتنا الأولى ولنجعل ولاءنا الأعلى لوطننا وشعبنا ولنعمل معًا من أجل دولة عادلة وقوية يتساوى فيها المواطنون وتصان فيها الحقوق وتحفظ فيها الكرامة ويجد فيها كل سوداني مكانه ومستقبله.</p>
+
+            <p style="text-align: center; font-weight: bold; font-size: 18px; color: #d32f2f; margin-top: 25px;">السودان أولًا والسودان دائمًا.</p>
+        </div>
+
     </div>
 
     <footer>
-        جميع الحقوق محفوظة © 2026 - SSC
+        جميع الحقوق محفوظة © 2026 - العقد المجتمعي السوداني (SSC)
     </footer>
 
     <script>
-        const newsData = {
-            field: {
-                title: "أخبار التطورات الميدانية والأمنية",
-                list: [
-                    {
-                        headline: "ضربات مسيرة وتكثيف أمني بأم درمان والخرطوم",
-                        content: "شهدت منازل ومناطق العاصمة ضربات متتالية بالطائرات المسيرة الانقضاضية، بالتزامن مع مواصلة العمليات الأمنية المكثفة لشرطة أم درمان في استرداد المسروقات وتأمين الأحياء السكنية."
-                    },
-                    {
-                        headline: "عمليات نوعية بالنيل الأزرق وضبط تهريب أسلحة",
-                        content: "أعلن الجيش السوداني تنفيذ عمليات نوعية ناجحة في ولاية النيل الأزرق، مع استمرار المتابعات الميدانية المكثفة على الحدود، حيث تمكنت القوات بالبحر الأحمر من ضبط شحنات تهريب أسلحة كبيرة."
-                    }
-                ]
-            },
-            diplomatic: {
-                title: "أخبار الحراك الدبلوماسي والدولي",
-                list: [
-                    {
-                        headline: "مجلس الأمن يمدد ولاية فريق الخبراء تقنياً",
-                        content: "اعتمد مجلس الأمن الدولي قراراً جديداً بتمديد ولاية فريق الخبراء المعني بالسودان تقنياً لمدة شهرين، دون التوصل لإجماع حول مقترح حظر الأسلحة الشامل بسبب تحفظات دولية."
-                    },
-                    {
-                        headline: "استمرار مشاورات الآلية الخماسية",
-                        content: "واصلت الآلية الخماسية لقاءاتها ومشاوراتها مع كافة الأطراف والقوى السياسية لبحث مسارات حقيقية لوقف الحرب، مع التأكيد المستمر على عدم وجود أي حل عسكري للأزمة."
-                    }
-                ]
-            },
-            services: {
-                title: "أخبار الوضع الاقتصادي والخدمي",
-                list: [
-                    {
-                        headline: "تغيرات أسعار الصرف واستمرار الضغوط الاقتصادية",
-                        content: "تسجيل ضغوط متزايدة في أسواق الصرف وانعكاسها على أسعار السلع الأساسية والمواد الغذائية في مختلف الولايات."
-                    },
-                    {
-                        headline: "مذكرة تفاهم لبناء وتأهيل مصافي النفط",
-                        content: "توقيع اتفاقيات ومذكرات تفاهم تهدف لإعادة تأهيل مصفاة الخرطوم وإنشاء مصفاة جديدة بمدينة بورتسودان لدعم قطاع الطاقة."
-                    },
-                    {
-                        headline: "جامعة الخرطوم تعلن ترتيبات العودة والتسجيل",
-                        content: "أعلنت إدارة جامعة الخرطوم عن بدء الترتيبات الفعلية للعودة والتسجيل التدريجي لطلاب الكليات المختلفة وفق الخطة الزمنية المعتمدة."
-                    }
-                ]
-            }
-        };
-
-        function openPage(sectionKey) {
-            const data = newsData[sectionKey];
-            if (!data) return;
-
-            document.getElementById('pageTitle').innerText = data.title;
-            
-            const container = document.getElementById('pageNewsContainer');
-            container.innerHTML = '';
-
-            data.list.forEach(item => {
-                const newsHtml = `
-                    <div class="sub-news-item">
-                        <h4>${item.headline}</h4>
-                        <p>${item.content}</p>
-                    </div>
-                `;
-                container.innerHTML += newsHtml;
-            });
-
+        function openArticle() {
             document.getElementById('homePage').style.display = 'none';
-            document.getElementById('newsPage').style.display = 'block';
+            document.getElementById('articlePage').style.display = 'block';
             window.scrollTo(0, 0);
         }
 
         function goHome() {
-            document.getElementById('newsPage').style.display = 'none';
+            document.getElementById('articlePage').style.display = 'none';
             document.getElementById('homePage').style.display = 'block';
             window.scrollTo(0, 0);
         }
